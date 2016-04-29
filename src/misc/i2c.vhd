@@ -16,6 +16,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity i2c is
 generic(
@@ -46,7 +47,9 @@ port(
     scl_o       : out std_logic;
     sda_miso_i  : in std_logic;
     sda_mosi_o  : out std_logic;
-    sda_tri_o   : out std_logic
+    sda_tri_o   : out std_logic;
+
+    trig : out std_logic_vector(27 downto 0)
     
 );
 end i2c;
@@ -103,6 +106,7 @@ begin
                 falling_clk <= '0';
                 low_clk <= '0';
             else
+trig(11 downto 0) <= std_logic_vector(to_unsigned(clk_divider,12));
                 -- Counting
                 if (clk_divider = (CLK_DIV - 1)) then
                     clk_divider <= 0;
@@ -134,6 +138,8 @@ begin
                     falling_clk <= '0';
                 end if;
                 -- Low clock pulse
+trig(23 downto 12) <= std_logic_vector(to_unsigned((CLK_DIV - 1) * 3 / 4,12));
+trig(24) <= low_clk;
                 if (clk_divider = (CLK_DIV - 1) * 3 / 4) then
                     low_clk <= '1';
                 else
@@ -195,6 +201,7 @@ begin
                         end if;                       
                     -- Transmit the address signal
                     when ADDR => 
+trig(27 downto 25) <= std_logic_vector(to_unsigned(address_cnt,3));
                         -- Write data on a low clock
                         if (low_clk = '1') then
                             -- Master controls the line

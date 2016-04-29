@@ -38,7 +38,9 @@ port(
     vfat2_scl_o         : out std_logic;
     vfat2_sda_miso_i    : in std_logic;
     vfat2_sda_mosi_o    : out std_logic;
-    vfat2_sda_tri_o     : out std_logic
+    vfat2_sda_tri_o     : out std_logic;
+ 
+    trig : out std_logic_vector(31 downto 0)
     
 );
 end vfat2_i2c;
@@ -74,7 +76,8 @@ begin
         i2c_data_o      => i2c_din,
         i2c_valid_i     => i2c_valid,
         i2c_error_i     => i2c_error,
-        i2c_data_i      => i2c_dout
+        i2c_data_i      => i2c_dout,
+        trig => trig(3 downto 0)
     );
     
     --==========================--
@@ -99,7 +102,8 @@ begin
         scl_o       => vfat2_scl_o,
         sda_miso_i  => vfat2_sda_miso_i,
         sda_mosi_o  => vfat2_sda_mosi_o,
-        sda_tri_o   => vfat2_sda_tri_o
+        sda_tri_o   => vfat2_sda_tri_o,
+        trig => trig(31 downto 4)
     );
 
 end Behavioral;

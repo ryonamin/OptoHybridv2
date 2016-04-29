@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Copyright (c) 2015 Xilinx, Inc.
+-- Copyright (c) 2016 Xilinx, Inc.
 -- All Rights Reserved
 -------------------------------------------------------------------------------
 --   ____  ____
@@ -8,7 +8,7 @@
 -- \   \   \/     Version    : 14.7
 --  \   \         Application: Xilinx CORE Generator
 --  /   /         Filename   : chipscope_icon.vho
--- /___/   /\     Timestamp  : Wed Aug 05 09:25:20 Romance Daylight Time 2015
+-- /___/   /\     Timestamp  : Wed Apr 27 12:17:47 CEST 2016
 -- \   \  /  \
 --  \___\/\___\
 --
@@ -20,8 +20,7 @@
 ------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
 component chipscope_icon
   PORT (
-    CONTROL0 : INOUT STD_LOGIC_VECTOR(35 DOWNTO 0);
-    CONTROL1 : INOUT STD_LOGIC_VECTOR(35 DOWNTO 0));
+    CONTROL0 : INOUT STD_LOGIC_VECTOR(35 DOWNTO 0));
 
 end component;
 
@@ -32,7 +31,6 @@ end component;
 
 your_instance_name : chipscope_icon
   port map (
-    CONTROL0 => CONTROL0,
-    CONTROL1 => CONTROL1);
+    CONTROL0 => CONTROL0);
 
 -- INST_TAG_END ------ End INSTANTIATION Template ------------

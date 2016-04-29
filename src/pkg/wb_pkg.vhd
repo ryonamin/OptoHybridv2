@@ -22,7 +22,8 @@ package wb_pkg is
     
     --== Wishbone masters ==--
     
-	constant WB_MASTERS         : positive := 4;
+	--constant WB_MASTERS         : positive := 4;
+	constant WB_MASTERS         : positive := 5;
     
     constant WB_MST_GTX         : integer := 0;
     
@@ -31,6 +32,8 @@ package wb_pkg is
     constant WB_MST_SCAN        : integer := 2;
     
     constant WB_MST_DAC         : integer := 3;
+    
+    constant WB_MST_PROM        : integer := 4;
     
     --== Wishbone slaves ==--
     

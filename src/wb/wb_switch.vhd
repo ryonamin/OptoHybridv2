@@ -36,7 +36,9 @@ port(
     
     -- Responses
     wb_res_i    : in wb_res_array_t((WB_SLAVES - 1) downto 0); -- From slaves responses
-    wb_res_o    : out wb_res_array_t((WB_MASTERS - 1) downto 0) -- To masters responses
+    wb_res_o    : out wb_res_array_t((WB_MASTERS - 1) downto 0); -- To masters responses
+   
+    trig : out std_logic_vector(23 downto 0)
     
 );
 end wb_switch;
@@ -88,6 +90,9 @@ begin
                                 -- Save the request
                                 wb_req(I) <= wb_req_i(I);
                                 -- Select the slave to address
+if I = WB_MST_PROM then
+  trig(23 downto 0) <= wb_req_i(I).addr(23 downto 0);
+end if;
                                 sel_slave(I) <= wb_addr_sel(wb_req_i(I).addr);
                                 -- Set the timeout
                                 timeouts(I) <= to_unsigned(WB_TIMEOUT, 32);

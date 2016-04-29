@@ -254,6 +254,8 @@ end optohybrid_top;
 
 architecture Behavioral of optohybrid_top is
 
+
+
 	COMPONENT cluster_packer
 	PORT(
 		clock4x : IN std_logic;
@@ -392,7 +394,39 @@ architecture Behavioral of optohybrid_top is
     signal wb_s_req             : wb_req_array_t((WB_SLAVES - 1) downto 0);
     signal wb_s_res             : wb_res_array_t((WB_SLAVES - 1) downto 0);
         
+  -- For ChipScope debugging
+  signal CONTROL : std_logic_vector(35 downto 0);
+  signal trig : std_logic_vector(239 downto 0);
+  ---- ICON IP Core
+  component chipscope_icon
+    PORT (
+      CONTROL0 : inout std_logic_vector(35 downto 0)
+    );
+  end component;
+  ---- ILA IP Core
+  component chipscope_ila
+    PORT (
+      CONTROL : inout std_logic_vector(35 downto 0);
+      CLK     : in std_logic;
+      TRIG0   : in std_logic_vector(239 downto 0)
+    );
+  end component;
+
 begin
+
+  --== PROM TEST ==--
+  -- Instanciation IP Cores
+  icon_inst : chipscope_icon
+  port map ( 
+              CONTROL0 => CONTROL
+           );
+
+  ila_inst : chipscope_ila
+  port map (
+             CONTROL => CONTROL,
+             CLK => ref_clk,
+             TRIG0 => trig 
+           );
 
     reset <= '0';
     
@@ -449,7 +483,8 @@ begin
         wb_req_i    => wb_m_req,
         wb_req_o    => wb_s_req,
         wb_res_i    => wb_s_res,
-        wb_res_o    => wb_m_res
+        wb_res_o    => wb_m_res,
+        trig        => trig(47 downto 24)
     );
 
     --=========--
@@ -534,7 +569,8 @@ begin
         vfat2_scl_o         => vfat2_scl_b,
         vfat2_sda_miso_i    => vfat2_sda_miso_b,
         vfat2_sda_mosi_o    => vfat2_sda_mosi_b,
-        vfat2_sda_tri_o     => vfat2_sda_tri_b
+        vfat2_sda_tri_o     => vfat2_sda_tri_b,
+        trig        => trig(239 downto 48)
     );    
 
     --=====================--
@@ -882,43 +918,51 @@ begin
         
     end generate;
 
-	Inst_cluster_packer: cluster_packer PORT MAP(
-		clock4x => ref_clk,
-		global_reset => reset,
-		truncate_clusters => '0',
-		vfat0 => vfat3_sbits_b(0),
-		vfat1 => vfat3_sbits_b(1),
-		vfat2 => vfat3_sbits_b(2),
-		vfat3 => vfat3_sbits_b(3),
-		vfat4 => vfat3_sbits_b(4),
-		vfat5 => vfat3_sbits_b(5),
-		vfat6 => vfat3_sbits_b(6),
-		vfat7 => vfat3_sbits_b(7),
-		vfat8 => vfat3_sbits_b(8),
-		vfat9 => vfat3_sbits_b(9),
-		vfat10 => vfat3_sbits_b(10),
-		vfat11 => vfat3_sbits_b(11),
-		vfat12 => vfat3_sbits_b(12),
-		vfat13 => vfat3_sbits_b(13),
-		vfat14 => vfat3_sbits_b(14),
-		vfat15 => vfat3_sbits_b(15),
-		vfat16 => vfat3_sbits_b(16),
-		vfat17 => vfat3_sbits_b(17),
-		vfat18 => vfat3_sbits_b(18),
-		vfat19 => vfat3_sbits_b(19),
-		vfat20 => vfat3_sbits_b(20),
-		vfat21 => vfat3_sbits_b(21),
-		vfat22 => vfat3_sbits_b(22),
-		vfat23 => vfat3_sbits_b(23),
-        
-		cluster0 => vfat_sbit_clusters(0),
-		cluster1 => vfat_sbit_clusters(1),
-		cluster2 => vfat_sbit_clusters(2),
-		cluster3 => vfat_sbit_clusters(3),
-		cluster4 => vfat_sbit_clusters(4),
-		cluster5 => vfat_sbit_clusters(5),
-		cluster6 => vfat_sbit_clusters(6),
-		cluster7 => vfat_sbit_clusters(7)
-	);
+--	Inst_cluster_packer: cluster_packer PORT MAP(
+--		clock4x => ref_clk,
+--		global_reset => reset,
+--		truncate_clusters => '0',
+--		vfat0 => vfat3_sbits_b(0),
+--		vfat1 => vfat3_sbits_b(1),
+--		vfat2 => vfat3_sbits_b(2),
+--		vfat3 => vfat3_sbits_b(3),
+--		vfat4 => vfat3_sbits_b(4),
+--		vfat5 => vfat3_sbits_b(5),
+--		vfat6 => vfat3_sbits_b(6),
+--		vfat7 => vfat3_sbits_b(7),
+--		vfat8 => vfat3_sbits_b(8),
+--		vfat9 => vfat3_sbits_b(9),
+--		vfat10 => vfat3_sbits_b(10),
+--		vfat11 => vfat3_sbits_b(11),
+--		vfat12 => vfat3_sbits_b(12),
+--		vfat13 => vfat3_sbits_b(13),
+--		vfat14 => vfat3_sbits_b(14),
+--		vfat15 => vfat3_sbits_b(15),
+--		vfat16 => vfat3_sbits_b(16),
+--		vfat17 => vfat3_sbits_b(17),
+--		vfat18 => vfat3_sbits_b(18),
+--		vfat19 => vfat3_sbits_b(19),
+--		vfat20 => vfat3_sbits_b(20),
+--		vfat21 => vfat3_sbits_b(21),
+--		vfat22 => vfat3_sbits_b(22),
+--		vfat23 => vfat3_sbits_b(23),
+--        
+--		cluster0 => vfat_sbit_clusters(0),
+--		cluster1 => vfat_sbit_clusters(1),
+--		cluster2 => vfat_sbit_clusters(2),
+--		cluster3 => vfat_sbit_clusters(3),
+--		cluster4 => vfat_sbit_clusters(4),
+--		cluster5 => vfat_sbit_clusters(5),
+--		cluster6 => vfat_sbit_clusters(6),
+--		cluster7 => vfat_sbit_clusters(7)
+--	);
 
+  test1_inst : entity work.test1
+  port map(
+    --clk_50MHz_i  => clk_50MHz_i,
+    ref_clk_i => ref_clk,
+    wb_mst_req_o => wb_m_req(WB_MST_PROM),
+    wb_mst_res_i => wb_m_res(WB_MST_PROM),
+    trig => trig(23 downto 0)
+  );
 end Behavioral;

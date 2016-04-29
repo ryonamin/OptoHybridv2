@@ -40,7 +40,9 @@ port(
     i2c_data_o      : out std_logic_vector(7 downto 0);
     i2c_valid_i     : in std_logic;
     i2c_error_i     : in std_logic;
-    i2c_data_i      : in std_logic_vector(7 downto 0)
+    i2c_data_i      : in std_logic_vector(7 downto 0);
+   
+    trig : out std_logic_vector(3 downto 0)
     
 );
 end vfat2_i2c_req;
@@ -80,6 +82,7 @@ begin
                 case state is                
                     -- Wait for request
                     when IDLE =>
+trig <= X"0";
                         -- Reset the flags
                         wb_slv_res_o.ack <= '0';
                         -- On request
@@ -101,6 +104,7 @@ begin
                         end if;                           
                     -- Check the parameters
                     when CHECKS =>
+trig <= X"1"; --test
                         -- Check ChipID
                         if (chipid = "000") then
                             -- The chip ID is not valid, send an error
@@ -117,6 +121,7 @@ begin
                         end if;                       
                     -- Send the request
                     when EXEC =>
+trig <= X"2"; --test
                         -- Normal reg
                         if (reg(7 downto 4) = "0000") then
                             -- Send a request
@@ -136,6 +141,7 @@ begin
                         end if;                        
                     -- Acknowledgment for a normal register
                     when ACK_0 =>
+trig <= X"3"; --test
                         -- Reset the strobe
                         i2c_en_o <= '0';
                         -- Wait for a valid signal
@@ -151,6 +157,7 @@ begin
                         end if;                        
                     -- Acknowledgment for an extended register
                     when ACK_1 =>
+trig <= X"4"; --test
                         -- Reset the strobe
                         i2c_en_o <= '0';
                         -- Wait for a valid signal
@@ -169,6 +176,7 @@ begin
                         end if;                        
                     --
                     when others => 
+trig <= X"5";
                         wb_slv_res_o <= (ack => '0', stat => (others => '0'), data => (others => '0'));
                         i2c_en_o <= '0';
                         i2c_address_o <= (others => '0');

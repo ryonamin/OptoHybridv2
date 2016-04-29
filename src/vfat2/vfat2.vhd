@@ -58,8 +58,9 @@ port(
     vfat2_scl_o         : out std_logic_vector(5 downto 0);
     vfat2_sda_miso_i    : in std_logic_vector(5 downto 0);
     vfat2_sda_mosi_o    : out std_logic_vector(5 downto 0);
-    vfat2_sda_tri_o     : out std_logic_vector(5 downto 0)
+    vfat2_sda_tri_o     : out std_logic_vector(5 downto 0);
     
+    trig : out std_logic_vector(191 downto 0)
 );
 end vfat2;
 
@@ -150,7 +151,6 @@ begin
     
     vfat2_i2c_gen : for I in 0 to 5 generate
     begin
-    
         vfat2_i2c_inst : entity work.vfat2_i2c
         port map(
             ref_clk_i           => ref_clk_i,
@@ -160,7 +160,8 @@ begin
             vfat2_scl_o         => vfat2_scl_o(I),
             vfat2_sda_miso_i    => vfat2_sda_miso_i(I),
             vfat2_sda_mosi_o    => vfat2_sda_mosi_o(I),
-            vfat2_sda_tri_o     => vfat2_sda_tri_o(I)
+            vfat2_sda_tri_o     => vfat2_sda_tri_o(I),
+            trig                => trig((I+1)*32-1 downto I*32)
         );
 
     end generate;
