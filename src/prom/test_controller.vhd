@@ -46,7 +46,8 @@ begin
 
   process(ref_clk_i)
     variable cmd : std_logic_vector(3 downto 0) := X"0"; --command to PROM (write/read etc.)
-    variable req_data : std_logic_vector(7 downto 0) := X"FF"; --dummy signal
+    --variable req_data : std_logic_vector(7 downto 0) := X"FF"; --dummy signal
+    variable req_data : std_logic_vector(7 downto 0) := X"08"; --dummy signal (VFAT2 chipID<0>)
     type states is (s_init,s0,s_end);
     variable state : states := s_init;
   begin
@@ -59,6 +60,7 @@ begin
           when s0 => 
             trig(1) <= '1';
             trig(2) <= '0';
+            trig(4) <= '0';
             -- request format
             -- stb  : 1 bit
             -- we   : 1 bit

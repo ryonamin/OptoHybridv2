@@ -48,7 +48,8 @@ begin
     variable state : states := s_init;
 
     -- vfat2_counter =[0:23]
-    variable vfat2_counter : unsigned(4 downto 0) := "10000";
+    --variable vfat2_counter : unsigned(4 downto 0) := "10000"; -- vfat 16
+    variable vfat2_counter : unsigned(4 downto 0) := "10001"; -- vfat 17
     --variable req_we        : std_logic := '0'; 
     variable req_we        : std_logic; 
     --variable req_data      : std_logic_vector(7 downto 0) := X"00";
@@ -63,7 +64,6 @@ begin
   begin
     if rising_edge(ref_clk_i) then
       --if com_get_started = '1' then
-      trig(8) <= wb_slv_req_i.stb;
        
       -- do something on request
 
@@ -76,30 +76,34 @@ begin
                wb_slv_res_o <= (ack => '0', stat => (others => '0'), data => (others => '0'));
              end if;
            when s0 =>
-             trig(9) <= req_we;
-             trig(10) <= '0';
 
              -- recieve data from master (test_controller)
-             req_register := wb_slv_req_i.addr(7 downto 0);
-             req_data := wb_slv_req_i.data(7 downto 0);
+             --req_register := wb_slv_req_i.addr(7 downto 0);
+             req_register := wb_slv_req_i.data(7 downto 0); -- cmd for vfat must be specified to address
+             req_data := X"00"; --dummy data to communicate with vfat
              req_we := wb_slv_req_i.we;
             
              state := s1;
            when s1 => -- sending a command
-             trig(10) <= '1';
-             trig(7 downto 0) <= req_data;
-             --wb_mst_req_o <= (stb => '1', we => req_we, addr => WB_ADDR_I2C & "00000000000" & std_logic_vector(vfat2_counter) & req_register, data => x"000000" & req_data);
+             --trig(7 downto 0) <= req_data;
+             -- Now this becomes a master to vfat chips
+             wb_mst_req_o <= (stb => '1', we => req_we, addr => WB_ADDR_I2C & "00000000000" & std_logic_vector(vfat2_counter) & req_register, data => x"000000" & req_data);
+             trig(0) <= '0';
+             trig(1) <= '0';
              state := s2;
            when s2 => -- waiting the response
-             trig(10) <= '0';
-              -- Reset the strobe
-              --wb_mst_req_o.stb <= '0';
-              --if (wb_mst_res_i.ack = '1') then
-                --trig(7 downto 0) <= wb_mst_res_i.data(7 downto 0);
+              -- Reset the strobe and waiting for responses from vfats
+              wb_mst_req_o.stb <= '0';
+              trig(0) <= '1';
+              if (wb_mst_res_i.ack = '1') then
+                trig(1) <= '1';
+                trig(15 downto 8) <= wb_mst_res_i.data(7 downto 0);
                 --trig(11 downto 8) <= wb_mst_res_i.stat;
                 state := s_end;
-              --end if;                    
+              end if;                    
            when s_end =>
+             trig(0) <= '0';
+             trig(1) <= '0';
              -- tell the parent that the request is acknowledged. 
              wb_slv_res_o <= (ack => '1', stat => WB_NO_ERR, data => (others => '0'));
          end case;
