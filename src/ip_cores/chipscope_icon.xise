@@ -43,7 +43,7 @@
     <property xil_pn:name="Project Generator" xil_pn:value="CoreGen" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Property Specification in Project File" xil_pn:value="Store all values" xil_pn:valueState="default"/>
     <property xil_pn:name="Simulator" xil_pn:value="ISim (VHDL/Verilog)" xil_pn:valueState="default"/>
-    <property xil_pn:name="Speed Grade" xil_pn:value="-2" xil_pn:valueState="default"/>
+    <property xil_pn:name="Speed Grade" xil_pn:value="-1" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Synthesis Tool" xil_pn:value="XST (VHDL/Verilog)" xil_pn:valueState="default"/>
     <property xil_pn:name="Top-Level Source Type" xil_pn:value="HDL" xil_pn:valueState="default"/>
     <property xil_pn:name="Working Directory" xil_pn:value="." xil_pn:valueState="non-default"/>
@@ -52,8 +52,8 @@
     <!--                                                                                  -->
     <property xil_pn:name="PROP_DesignName" xil_pn:value="chipscope_icon" xil_pn:valueState="non-default"/>
     <property xil_pn:name="PROP_DevFamilyPMName" xil_pn:value="virtex6" xil_pn:valueState="default"/>
-    <property xil_pn:name="PROP_intProjectCreationTimestamp" xil_pn:value="2015-08-05T09:25:23" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="PROP_intWbtProjectID" xil_pn:value="CAF48691845744E3866DF2B29B09AD28" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="PROP_intProjectCreationTimestamp" xil_pn:value="2016-05-02T10:20:40" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="PROP_intWbtProjectID" xil_pn:value="9C4A56B6E336430A7CF41BAC56C64A9B" xil_pn:valueState="non-default"/>
     <property xil_pn:name="PROP_intWorkingDirLocWRTProjDir" xil_pn:value="Same" xil_pn:valueState="non-default"/>
     <property xil_pn:name="PROP_intWorkingDirUsed" xil_pn:value="No" xil_pn:valueState="non-default"/>
   </properties>

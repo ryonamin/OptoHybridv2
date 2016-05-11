@@ -22,8 +22,7 @@ package wb_pkg is
     
     --== Wishbone masters ==--
     
-	--constant WB_MASTERS         : positive := 5;
-	constant WB_MASTERS         : positive := 6; -- for testing purpose only
+	constant WB_MASTERS         : positive := 4;
     
     constant WB_MST_GTX         : integer := 0;
     
@@ -33,13 +32,9 @@ package wb_pkg is
     
     constant WB_MST_DAC         : integer := 3;
     
-    constant WB_MST_PROM        : integer := 4;
-
-    constant WB_MST_PROM_TEST   : integer := 5; -- for testing purpose onyl
-
     --== Wishbone slaves ==--
     
-	constant WB_SLAVES          : positive := 16;
+	constant WB_SLAVES          : positive := 15;
     
     constant WB_SLV_I2C_0       : integer := 0;
     constant WB_SLV_I2C_1       : integer := 1;
@@ -66,8 +61,6 @@ package wb_pkg is
     
     constant WB_SLV_STAT        : integer := 14;
     
-    constant WB_SLV_PROM        : integer := 15;
-
     --== Wishbone addresses ==--
     
     constant WB_ADDR_I2C        : std_logic_vector(7 downto 0) := x"40";
@@ -82,8 +75,6 @@ package wb_pkg is
     constant WB_ADDR_SYS        : std_logic_vector(7 downto 0) := x"4B";
     constant WB_ADDR_STAT       : std_logic_vector(7 downto 0) := x"4C";
    
-    constant WB_ADDR_PROM       : std_logic_vector(7 downto 0) := x"4D";
-
     --== Wishbone address selection & generation ==--
     
 	function wb_addr_sel(signal addr : std_logic_vector(31 downto 0)) return integer;
@@ -122,8 +113,6 @@ package body wb_pkg is
         elsif (std_match(addr, WB_ADDR_SYS  & "0000000000000000--------")) then sel := WB_SLV_SYS;  
         -- Status
         elsif (std_match(addr, WB_ADDR_STAT & "0000000000000000--------")) then sel := WB_SLV_STAT;  
-        -- PROM
-        elsif (std_match(addr, WB_ADDR_PROM & "00000000000000000000----")) then sel := WB_SLV_PROM;  
         --
         else sel := 99;
         end if;
