@@ -167,12 +167,12 @@ port(
     
 --    multiboot_rs_o          : out std_logic_vector(1 downto 0);
     
---    flash_address_o         : out std_logic_vector(22 downto 0);
---    flash_data_io           : inout std_logic_vector(15 downto 0);
---    flash_chip_enable_b_o   : out std_logic;
---    flash_out_enable_b_o    : out std_logic;
---    flash_write_enable_b_o  : out std_logic;
---    flash_latch_enable_b_o  : out std_logic;
+    flash_address_o         : out std_logic_vector(22 downto 0);
+    flash_data_io           : inout std_logic_vector(15 downto 0);
+    flash_chip_enable_b_o   : out std_logic;
+    flash_out_enable_b_o    : out std_logic;
+    flash_write_enable_b_o  : out std_logic;
+    flash_latch_enable_b_o  : out std_logic;
     
 --    eprom_data_i            : inout std_logic_vector(7 downto 0);
 --    eprom_clk_o             : out std_logic;
@@ -394,7 +394,7 @@ architecture Behavioral of optohybrid_top is
         
   -- For ChipScope debugging
   signal CONTROL : std_logic_vector(35 downto 0);
-  signal trig : std_logic_vector(55 downto 0);
+  signal trig : std_logic_vector(79 downto 0);
   ---- ICON IP Core
   component chipscope_icon
     PORT (
@@ -406,7 +406,7 @@ architecture Behavioral of optohybrid_top is
     PORT (
       CONTROL : inout std_logic_vector(35 downto 0);
       CLK     : in std_logic;
-      TRIG0   : in std_logic_vector(55 downto 0)
+      TRIG0   : in std_logic_vector(79 downto 0)
     );
   end component;
 
@@ -423,30 +423,45 @@ begin
   port map (
              CONTROL => CONTROL,
              CLK => ref_clk,
+             --CLK => clk_50MHz_i,
              TRIG0 => trig 
            );
 
   prom_inst : entity work.prom
   port map(
     ref_clk_i => ref_clk,
+    clk_50MHz_i => clk_50MHz_i,
     wb_slv_req_i => wb_s_req(WB_SLV_PROM),
     wb_slv_res_o => wb_s_res(WB_SLV_PROM),
     wb_mst_req_o => wb_m_req(WB_MST_PROM),
     wb_mst_res_i => wb_m_res(WB_MST_PROM),
-    trig => trig(23 downto 8)
+    flash_address_o => flash_address_o,
+    flash_data_io   => flash_data_io,
+    --flash_ctl_o     => flash_chip_enable_b_o & flash_latch_enable_b_o & flash_out_enable_b_o & flash_write_enable_b_o, 
+    --flash_chip_enable_b_o => flash_chip_enable_b_o,
+    --flash_latch_enable_b_o => flash_latch_enable_b_o,
+    --flash_out_enable_b_o => flash_out_enable_b_o,
+    --flash_write_enable_b_o => flash_write_enable_b_o, 
+    flash_ctl_o(3) => flash_chip_enable_b_o,
+    flash_ctl_o(2) => flash_latch_enable_b_o,
+    flash_ctl_o(1) => flash_out_enable_b_o,
+    flash_ctl_o(0) => flash_write_enable_b_o, 
+    trig => trig(66 downto 8)
   );
-  trig(25) <= wb_s_req(WB_SLV_PROM).stb;
 
   test_controller_inst : entity work.test_controller
   port map(
+    reset => reset,
     ref_clk_i => ref_clk,
+    clk_50MHz_i => clk_50MHz_i,
     wb_mst_req_o => wb_m_req(WB_MST_PROM_TEST),
     wb_mst_res_i => wb_m_res(WB_MST_PROM_TEST),
     trig => trig(7 downto 0)
   );
-  trig(24) <= wb_m_req(WB_MST_PROM_TEST).stb;
 
-    reset <= '0';
+-- !!! To make it work correctly, I had to reset once
+-- !!! What is the official way to reset? 
+--  reset <= '0';
     
     --==============--
     --== Clocking ==--
@@ -501,8 +516,7 @@ begin
         wb_req_i    => wb_m_req,
         wb_req_o    => wb_s_req,
         wb_res_i    => wb_s_res,
-        wb_res_o    => wb_m_res,
-        trig => trig(55 downto 32)
+        wb_res_o    => wb_m_res
     );
 
     --=========--
