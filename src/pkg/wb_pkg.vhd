@@ -123,7 +123,7 @@ package body wb_pkg is
         -- Status
         elsif (std_match(addr, WB_ADDR_STAT & "0000000000000000--------")) then sel := WB_SLV_STAT;  
         -- PROM
-        elsif (std_match(addr, WB_ADDR_PROM & "00000000000000000000----")) then sel := WB_SLV_PROM;  
+        elsif (std_match(addr, WB_ADDR_PROM & "------------------------")) then sel := WB_SLV_PROM;  
         --
         else sel := 99;
         end if;

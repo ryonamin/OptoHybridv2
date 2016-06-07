@@ -36,9 +36,9 @@ port(
     
     -- Responses
     wb_res_i    : in wb_res_array_t((WB_SLAVES - 1) downto 0); -- From slaves responses
-    wb_res_o    : out wb_res_array_t((WB_MASTERS - 1) downto 0) -- To masters responses
+    wb_res_o    : out wb_res_array_t((WB_MASTERS - 1) downto 0); -- To masters responses
 
---trig : out std_logic_vector(23 downto 0) 
+trig : out std_logic_vector(7 downto 0) 
 );
 end wb_switch;
 
@@ -96,11 +96,16 @@ begin
                                 -- Change state
                                 states(I) <= WAITING;
                             end if;
+if I = WB_MST_GTX then
 --if I = WB_MST_PROM_TEST then
-----  trig(23 downto 0) <= wb_req_i(I).addr(31 downto 8);
+  trig(0) <= '1';
+  trig(1) <= wb_req_i(I).stb;
+  trig(2) <= wb_req_i(I).we;
+  trig(7 downto 4) <= wb_req_i(I).addr(23 downto 20);
+--  trig(23 downto 0) <= wb_req_i(I).addr(31 downto 8);
 --  trig(22) <= wb_req_i(I).stb;
 --  trig(21) <= wb_req_i(I).we;
---end if;
+end if;
                         -- Wait to transfer request
                         when WAITING =>
                             -- Check the timeout

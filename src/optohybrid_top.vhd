@@ -429,6 +429,7 @@ begin
 
   prom_inst : entity work.prom
   port map(
+    reset => reset,
     ref_clk_i => ref_clk,
     clk_50MHz_i => clk_50MHz_i,
     wb_slv_req_i => wb_s_req(WB_SLV_PROM),
@@ -451,7 +452,7 @@ begin
 
   test_controller_inst : entity work.test_controller
   port map(
-    reset => reset,
+    --reset => reset,
     ref_clk_i => ref_clk,
     clk_50MHz_i => clk_50MHz_i,
     wb_mst_req_o => wb_m_req(WB_MST_PROM_TEST),
@@ -516,7 +517,8 @@ begin
         wb_req_i    => wb_m_req,
         wb_req_o    => wb_s_req,
         wb_res_i    => wb_s_res,
-        wb_res_o    => wb_m_res
+        wb_res_o    => wb_m_res,
+trig => trig(74 downto 67) 
     );
 
     --=========--
