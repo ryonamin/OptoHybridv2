@@ -867,58 +867,58 @@ begin
     );
     
     
-    --=========================--
-    --== SBit cluster packer ==--
-    --=========================--
-
-    -- map the VFAT2 SBits (8 per VFAT) to VFAT3 like structure (64 per VFAT) that is expected by the cluster packer
-    vfat2_to_vfat3_sbit_map_gen : for I in 0 to 23 generate
-    begin
-    
-        vfat2_sbit_loop: for J in 0 to 7 generate
-        begin
-            vfat3_sbits_b(I)((J * 8) + 7 downto (J * 8)) <= (others => vfat2_sbits_b(I)(J));
-        end generate;
-        
-    end generate;
-
-	Inst_cluster_packer: cluster_packer PORT MAP(
-		clock4x => ref_clk,
-		global_reset => reset,
-		truncate_clusters => '0',
-		vfat0 => vfat3_sbits_b(0),
-		vfat1 => vfat3_sbits_b(1),
-		vfat2 => vfat3_sbits_b(2),
-		vfat3 => vfat3_sbits_b(3),
-		vfat4 => vfat3_sbits_b(4),
-		vfat5 => vfat3_sbits_b(5),
-		vfat6 => vfat3_sbits_b(6),
-		vfat7 => vfat3_sbits_b(7),
-		vfat8 => vfat3_sbits_b(8),
-		vfat9 => vfat3_sbits_b(9),
-		vfat10 => vfat3_sbits_b(10),
-		vfat11 => vfat3_sbits_b(11),
-		vfat12 => vfat3_sbits_b(12),
-		vfat13 => vfat3_sbits_b(13),
-		vfat14 => vfat3_sbits_b(14),
-		vfat15 => vfat3_sbits_b(15),
-		vfat16 => vfat3_sbits_b(16),
-		vfat17 => vfat3_sbits_b(17),
-		vfat18 => vfat3_sbits_b(18),
-		vfat19 => vfat3_sbits_b(19),
-		vfat20 => vfat3_sbits_b(20),
-		vfat21 => vfat3_sbits_b(21),
-		vfat22 => vfat3_sbits_b(22),
-		vfat23 => vfat3_sbits_b(23),
-        
-		cluster0 => vfat_sbit_clusters(0),
-		cluster1 => vfat_sbit_clusters(1),
-		cluster2 => vfat_sbit_clusters(2),
-		cluster3 => vfat_sbit_clusters(3),
-		cluster4 => vfat_sbit_clusters(4),
-		cluster5 => vfat_sbit_clusters(5),
-		cluster6 => vfat_sbit_clusters(6),
-		cluster7 => vfat_sbit_clusters(7)
-	);
-
+--    --=========================--
+--    --== SBit cluster packer ==--
+--    --=========================--
+--
+--    -- map the VFAT2 SBits (8 per VFAT) to VFAT3 like structure (64 per VFAT) that is expected by the cluster packer
+--    vfat2_to_vfat3_sbit_map_gen : for I in 0 to 23 generate
+--    begin
+--    
+--        vfat2_sbit_loop: for J in 0 to 7 generate
+--        begin
+--            vfat3_sbits_b(I)((J * 8) + 7 downto (J * 8)) <= (others => vfat2_sbits_b(I)(J));
+--        end generate;
+--        
+--    end generate;
+--
+--	Inst_cluster_packer: cluster_packer PORT MAP(
+--		clock4x => ref_clk,
+--		global_reset => reset,
+--		truncate_clusters => '0',
+--		vfat0 => vfat3_sbits_b(0),
+--		vfat1 => vfat3_sbits_b(1),
+--		vfat2 => vfat3_sbits_b(2),
+--		vfat3 => vfat3_sbits_b(3),
+--		vfat4 => vfat3_sbits_b(4),
+--		vfat5 => vfat3_sbits_b(5),
+--		vfat6 => vfat3_sbits_b(6),
+--		vfat7 => vfat3_sbits_b(7),
+--		vfat8 => vfat3_sbits_b(8),
+--		vfat9 => vfat3_sbits_b(9),
+--		vfat10 => vfat3_sbits_b(10),
+--		vfat11 => vfat3_sbits_b(11),
+--		vfat12 => vfat3_sbits_b(12),
+--		vfat13 => vfat3_sbits_b(13),
+--		vfat14 => vfat3_sbits_b(14),
+--		vfat15 => vfat3_sbits_b(15),
+--		vfat16 => vfat3_sbits_b(16),
+--		vfat17 => vfat3_sbits_b(17),
+--		vfat18 => vfat3_sbits_b(18),
+--		vfat19 => vfat3_sbits_b(19),
+--		vfat20 => vfat3_sbits_b(20),
+--		vfat21 => vfat3_sbits_b(21),
+--		vfat22 => vfat3_sbits_b(22),
+--		vfat23 => vfat3_sbits_b(23),
+--        
+--		cluster0 => vfat_sbit_clusters(0),
+--		cluster1 => vfat_sbit_clusters(1),
+--		cluster2 => vfat_sbit_clusters(2),
+--		cluster3 => vfat_sbit_clusters(3),
+--		cluster4 => vfat_sbit_clusters(4),
+--		cluster5 => vfat_sbit_clusters(5),
+--		cluster6 => vfat_sbit_clusters(6),
+--		cluster7 => vfat_sbit_clusters(7)
+--	);
+--
 end Behavioral;
