@@ -8,7 +8,7 @@
 -- \   \   \/     Version    : 14.7
 --  \   \         Application: Xilinx CORE Generator
 --  /   /         Filename   : chipscope_ila.vho
--- /___/   /\     Timestamp  : Tue May 17 15:55:00 CEST 2016
+-- /___/   /\     Timestamp  : Mon Jul 04 15:47:11 CEST 2016
 -- \   \  /  \
 --  \___\/\___\
 --
@@ -22,7 +22,7 @@ component chipscope_ila
   PORT (
     CONTROL : INOUT STD_LOGIC_VECTOR(35 DOWNTO 0);
     CLK : IN STD_LOGIC;
-    TRIG0 : IN STD_LOGIC_VECTOR(79 DOWNTO 0));
+    TRIG0 : IN STD_LOGIC_VECTOR(111 DOWNTO 0));
 
 end component;
 

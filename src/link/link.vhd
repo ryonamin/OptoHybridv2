@@ -52,6 +52,8 @@ port(
     tr_error_o      : out std_logic;
     evt_sent_o      : out std_logic
     
+ 
+--trig : out std_logic_vector(111 downto 0)
 );
 end link;
 
@@ -152,7 +154,8 @@ begin
         rx_data_i       => g2o_req_data,          
         tx_en_i         => o2g_req_en,
         tx_valid_o      => o2g_req_valid,
-        tx_data_o       => o2g_req_data      
+        tx_data_o       => o2g_req_data
+--trig => trig      
     );  
     
     --======================================--

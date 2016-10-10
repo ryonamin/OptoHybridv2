@@ -53,7 +53,7 @@
 <msg type="warning" file="HDLCompiler" num="1127" delta="old" >"/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_ila_v1_05_a/ila_cap_storage.vhd" Line 184: Assignment to <arg fmt="%s" index="1">logic_0</arg> ignored, since the identifier is never used
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="89" delta="new" >"/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd" Line 68: &lt;<arg fmt="%s" index="1">ramb18e1</arg>&gt; remains a black-box since it has no binding entity.
+<msg type="warning" file="HDLCompiler" num="89" delta="old" >"/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd" Line 68: &lt;<arg fmt="%s" index="1">ramb18e1</arg>&gt; remains a black-box since it has no binding entity.
 </msg>
 
 <msg type="warning" file="HDLCompiler" num="634" delta="old" >"/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_ila_v1_05_a/ila_core.vhd" Line 383: Net &lt;<arg fmt="%s" index="1">iCFG_EN_VEC[15]</arg>&gt; does not have a driver.
@@ -245,6 +245,30 @@
 <msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">RESET_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 </msg>
 
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CLK_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">RESET_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CLK_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">RESET_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CLK_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">RESET_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CLK_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">RESET_I</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
 <msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">CFG_TSEQ_EN</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 </msg>
 
@@ -323,10 +347,13 @@
 <msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_ila_v1_05_a/ila_trace_buffer.vhd</arg>&quot; line <arg fmt="%s" index="2">210</arg>: Output port &lt;<arg fmt="%s" index="3">COUNT_O</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">I_MULT_ROW.U_RD_COL_ADDR_A</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd</arg>&quot; line <arg fmt="%s" index="2">418</arg>: Output port &lt;<arg fmt="%s" index="3">DOBDO</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U_RAMB18E1</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd</arg>&quot; line <arg fmt="%s" index="2">418</arg>: Output port &lt;<arg fmt="%s" index="3">DOBDO</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U_RAMB18E1</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd</arg>&quot; line <arg fmt="%s" index="2">418</arg>: Output port &lt;<arg fmt="%s" index="3">DOPBDOP</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U_RAMB18E1</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/ryonamin/soft/proj_fpga/thomas_git/src/ip_cores/tmp/_cg/_bbx/chipscope_lib_v1_03_a/cs_bram_simple_v6_ramb18.vhd</arg>&quot; line <arg fmt="%s" index="2">418</arg>: Output port &lt;<arg fmt="%s" index="3">DOPBDOP</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U_RAMB18E1</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="1901" delta="new" >Instance <arg fmt="%s" index="1">U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36</arg> in unit <arg fmt="%s" index="2">U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[2].u_ramb36/U_RAMB36</arg> of type <arg fmt="%s" index="3">RAMB36</arg> has been replaced by <arg fmt="%s" index="4">RAMB36E1</arg>
 </msg>
 
 <msg type="info" file="Xst" num="1901" delta="old" >Instance <arg fmt="%s" index="1">U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36</arg> in unit <arg fmt="%s" index="2">U_RAM/I_V6.U_CS_BRAM_CASCADE_V6/I_DEPTH_LTEQ_32K.U_SBRAM_0/I_B36KGT0.G_RAMB36[1].u_ramb36/U_RAMB36</arg> of type <arg fmt="%s" index="3">RAMB36</arg> has been replaced by <arg fmt="%s" index="4">RAMB36E1</arg>

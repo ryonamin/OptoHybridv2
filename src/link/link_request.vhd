@@ -34,10 +34,8 @@ port(
     tx_en_i         : in std_logic;
     tx_valid_o      : out std_logic;
     tx_data_o       : out std_logic_vector(31 downto 0)
-    
 );
 end link_request;
-
 architecture Behavioral of link_request is
     
     signal rd_valid : std_logic;

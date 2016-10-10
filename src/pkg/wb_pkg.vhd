@@ -22,8 +22,7 @@ package wb_pkg is
     
     --== Wishbone masters ==--
     
-	--constant WB_MASTERS         : positive := 5;
-	constant WB_MASTERS         : positive := 6; -- for testing purpose only
+	constant WB_MASTERS         : positive := 4;
     
     constant WB_MST_GTX         : integer := 0;
     
@@ -33,10 +32,6 @@ package wb_pkg is
     
     constant WB_MST_DAC         : integer := 3;
     
-    constant WB_MST_PROM        : integer := 4;
-
-    constant WB_MST_PROM_TEST   : integer := 5; -- for testing purpose onyl
-
     --== Wishbone slaves ==--
     
 	constant WB_SLAVES          : positive := 16;
@@ -123,7 +118,7 @@ package body wb_pkg is
         -- Status
         elsif (std_match(addr, WB_ADDR_STAT & "0000000000000000--------")) then sel := WB_SLV_STAT;  
         -- PROM
-        elsif (std_match(addr, WB_ADDR_PROM & "------------------------")) then sel := WB_SLV_PROM;  
+        elsif (std_match(addr, WB_ADDR_PROM & "00000000----------------")) then sel := WB_SLV_PROM;  
         --
         else sel := 99;
         end if;
